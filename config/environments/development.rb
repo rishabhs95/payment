@@ -39,3 +39,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
+
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+
+end
