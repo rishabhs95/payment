@@ -1,28 +1,39 @@
-<% title "Shopping Cart" %>
+<p id="notice"><%= notice %></p>
 
-<table id="line_items">
+<!--
+<p>
+  <b>Purchased at:</b>
+<%= @cart.purchased_at %>
+</p>
+-->
+
+<h4>Products in Your cart</h4>
+<table>
   <tr>
-    <th>Product</th>
-    <th>Qty</th>
-    <th class="price">Unit Price</th>
-    <th class="price">Full Price</th>
+    <th>Product Name</th>
+    <th>Unit Price</th>
+    <th>Full Price</th>
   </tr>
   <% for line_item in @cart.line_items %>
-    <tr class="<%= cycle :odd, :even %>">
-      <td><%=h line_item.product.name %></td>
-      <td class="qty"><%= line_item.quantity %></td>
-      <td class="price"><%= number_to_currency(line_item.unit_price) %></td>
-      <td class="price"><%= number_to_currency(line_item.full_price) %></td>
+    <tr>
+      <td><%= line_item.product.name %></td>
+      <td><%= line_item.unit_price %></td>
+      <td><%= line_item.full_price %></td>
     </tr>
   <% end %>
-  <tr>
-    <td class="total price" colspan="4">
-      Total: <%= number_to_currency @cart.total_price %>
-    </td>
-  </tr>
 </table>
+<h3>Total: <%= number_to_currency @cart.total_price %> </h3>
 
 <p>
-  <%= link_to "Continue Shopping", products_path %> |
-  <%= link_to "Checkout", new_order_path %>
+  <%= link_to "Continue Shopping", products_path %>  
+  <% if  @cart.line_items.first %>
+    |
+    <%= link_to "Checkout", new_order_url %>
+  <% end %>
 </p>
+
+
+<!--
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', carts_path %>
+-->

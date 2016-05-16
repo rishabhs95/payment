@@ -1,8 +1,6 @@
-<% title "Edit Product" %>
+<h1>Editing product</h1>
 
-<%= render :partial => 'form' %>
+<%= render 'form' %>
 
-<p>
-  <%= link_to "Show", @product %> |
-  <%= link_to "View All", products_path %>
-</p>
+<%= link_to 'Show', @product %> |
+<%= link_to 'Back', products_path %>
