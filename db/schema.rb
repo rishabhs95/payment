@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513115538) do
+ActiveRecord::Schema.define(version: 20090119062501) do
 
   create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "purchased_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.decimal  "unit_price"
+    t.integer  "product_id"
+    t.integer  "cart_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "order_transactions", force: :cascade do |t|
@@ -26,8 +42,8 @@ ActiveRecord::Schema.define(version: 20160513115538) do
     t.string   "authorization"
     t.string   "message"
     t.text     "params"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -37,17 +53,17 @@ ActiveRecord::Schema.define(version: 20160513115538) do
     t.string   "last_name"
     t.string   "card_type"
     t.date     "card_expires_on"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "subscriptions", force: :cascade do |t|
-    t.string "stripe_customer_token"
-  end
-
-  create_table "welcomes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "products", force: :cascade do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.decimal  "price"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

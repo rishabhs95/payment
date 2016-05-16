@@ -1,5 +1,5 @@
 class CreateOrders < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :orders do |t|
       t.integer :cart_id
       t.string :ip_address
@@ -7,8 +7,11 @@ class CreateOrders < ActiveRecord::Migration
       t.string :last_name
       t.string :card_type
       t.date :card_expires_on
-
-      t.timestamps null: false
+      t.timestamps
     end
+  end
+  
+  def self.down
+    drop_table :orders
   end
 end

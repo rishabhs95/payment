@@ -13,4 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require controls
+//= require dragdrop
+//= require effects
+//= require prototype
 //= require_tree .

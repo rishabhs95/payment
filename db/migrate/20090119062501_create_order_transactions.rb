@@ -1,5 +1,5 @@
 class CreateOrderTransactions < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :order_transactions do |t|
       t.integer :order_id
       t.string :action
@@ -9,7 +9,11 @@ class CreateOrderTransactions < ActiveRecord::Migration
       t.string :message
       t.text :params
 
-      t.timestamps null: false
+      t.timestamps
     end
+  end
+
+  def self.down
+    drop_table :order_transactions
   end
 end
