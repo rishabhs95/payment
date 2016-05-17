@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @cart = current_cart
-    @order = Order.new(params[:order])  
+    @order = Order.new(order_params)  
     @order.cart_id = current_cart.id     
     session[:cart_id] = nil
     @order.ip_address = request.remote_ip
@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
 
     respond_to do |format|
-      if @order.update_attributes(params[:order])
+      if @order.update_attributes(order_params)
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { head :no_content }
       else
@@ -100,5 +100,10 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def order_params
+    params.require(:order).permit(:id, :cart_id, :ip_address, :first_name, :last_name, :card_number, :card_verification, :card_type, :card_expires_on, :created_at, :updated_at)
   end
 end

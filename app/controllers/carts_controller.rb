@@ -41,7 +41,7 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(params[:cart])
+    @cart = Cart.new(cart_params)
 
     respond_to do |format|
       if @cart.save
@@ -80,5 +80,11 @@ class CartsController < ApplicationController
       format.html { redirect_to carts_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def cart_params
+    params.require(:cart).permit(:id, :purchased_at, :created_at, :updated_at)
   end
 end
